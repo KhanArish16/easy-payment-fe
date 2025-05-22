@@ -8,7 +8,7 @@ function Appbar() {
     const fetchUser = async () => {
       try {
         const res = await axios.get(
-          "https://easy-payment-be-2.onrender.com/api/v1/user/me",
+          "https://easy-payment-be.onrender.com/api/v1/user/me",
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),

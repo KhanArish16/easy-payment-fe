@@ -13,7 +13,7 @@ function Dashboard() {
     const fetchBalance = async () => {
       try {
         const response = await axios.get(
-          "https://easy-payment-be-2.onrender.com/api/v1/account/balance",
+          "https://easy-payment-be.onrender.com/api/v1/account/balance",
           {
             headers: {
               Authorization: "Bearer " + localStorage.getItem("token"),

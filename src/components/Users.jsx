@@ -14,7 +14,7 @@ function Users() {
       setLoading(true);
       try {
         const response = await axios.get(
-          "https://easy-payment-be-2.onrender.com/api/v1/user/bulk?filter=" +
+          "https://easy-payment-be.onrender.com/api/v1/user/bulk?filter=" +
             filter
         );
         setUsers(response.data.user);

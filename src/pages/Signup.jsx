@@ -52,7 +52,7 @@ const Signup = () => {
             <Button
               onClick={async () => {
                 const response = await axios.post(
-                  "https://easy-payment-be-2.onrender.com/api/v1/user/signup",
+                  "https://easy-payment-be.onrender.com/api/v1/user/signup",
                   {
                     username,
                     firstname,
