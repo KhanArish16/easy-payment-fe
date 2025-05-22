@@ -3,21 +3,29 @@ import Appbar from "../components/Appbar";
 import Balance from "../components/Balance";
 import Users from "../components/Users";
 import axios from "axios";
+import { LoadingSpinner } from "../components/LoadingSpinner";
 
 function Dashboard() {
   const [balance, setBalance] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchBalance = async () => {
-      const response = await axios.get(
-        "http://localhost:3000/api/v1/account/balance",
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        }
-      );
-      setBalance(response.data.balance);
+      try {
+        const response = await axios.get(
+          "https://easy-payment-be-2.onrender.com/api/v1/account/balance",
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
+        setBalance(response.data.balance);
+      } catch (error) {
+        console.error("Failed to fetch balance:", error);
+      } finally {
+        setLoading(false); // always set loading to false
+      }
     };
 
     fetchBalance();
@@ -27,8 +35,14 @@ function Dashboard() {
     <div>
       <Appbar />
       <div className="m-8">
-        <Balance value={balance} />
-        <Users />
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            <Balance value={balance} />
+            <Users />
+          </>
+        )}
       </div>
     </div>
   );

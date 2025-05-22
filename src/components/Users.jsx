@@ -2,17 +2,30 @@ import { useEffect, useState } from "react";
 import { Button } from "./Button";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 function Users() {
   const [users, setUsers] = useState([]);
   const [filter, setFilter] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/api/v1/user/bulk?filter=" + filter)
-      .then((response) => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          "https://easy-payment-be-2.onrender.com/api/v1/user/bulk?filter=" +
+            filter
+        );
         setUsers(response.data.user);
-      });
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
   }, [filter]);
 
   return (
@@ -28,11 +41,15 @@ function Users() {
           className="w-full px-2 py-1 border rounded border-slate-200"
         ></input>
       </div>
-      <div>
-        {users.map((user) => (
-          <User user={user} />
-        ))}
-      </div>
+      {loading ? (
+        <LoadingSpinner />
+      ) : (
+        <div>
+          {users.map((user) => (
+            <User key={user._id} user={user} />
+          ))}
+        </div>
+      )}
     </>
   );
 }

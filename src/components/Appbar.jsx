@@ -7,11 +7,14 @@ function Appbar() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:3000/api/v1/user/me", {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
+        const res = await axios.get(
+          "https://easy-payment-be-2.onrender.com/api/v1/user/me",
+          {
+            headers: {
+              Authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
 
         setName(res.data.firstname); // or res.data.username
       } catch (error) {
