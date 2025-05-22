@@ -8,8 +8,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [firstname, setFirstName] = useState("");
+  const [lastname, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -55,13 +55,15 @@ const Signup = () => {
                   "http://localhost:3000/api/v1/user/signup",
                   {
                     username,
-                    firstName,
-                    lastName,
+                    firstname,
+                    lastname,
                     password,
                   }
                 );
                 localStorage.setItem("token", response.data.token);
                 navigate("/dashboard");
+
+                console.log(response);
               }}
               label={"Sign up"}
             />
