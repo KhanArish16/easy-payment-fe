@@ -24,7 +24,7 @@ function Dashboard() {
       } catch (error) {
         console.error("Failed to fetch balance:", error);
       } finally {
-        setLoading(false); // always set loading to false
+        setLoading(false);
       }
     };
 

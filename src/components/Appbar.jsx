@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button } from "./Button";
 
 function Appbar() {
   const [name, setName] = useState("");
@@ -34,7 +35,7 @@ function Appbar() {
 
   return (
     <div className="shadow h-14 flex justify-between items-center px-4">
-      <div className="text-lg font-semibold">PayTM App</div>
+      <div className="text-lg font-semibold">Easy Payment App</div>
       <div className="flex items-center gap-4">
         <div className="text-md">Hello, {name}</div>
         <div className="rounded-full h-10 w-10 bg-black flex items-center justify-center text-white text-lg uppercase">
