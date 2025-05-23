@@ -1,8 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Appbar() {
   const [name, setName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -25,16 +27,25 @@ function Appbar() {
     fetchUser();
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/signin");
+  };
+
   return (
-    <div className="shadow h-14 flex justify-between">
-      <div className="flex flex-col justify-center h-full ml-4">PayTM App</div>
-      <div className="flex">
-        <div className="flex flex-col justify-center h-full mr-4">Hello</div>
-        <div className="rounded-full h-12 w-12 bg-black flex justify-center  mt-1 mr-2">
-          <div className="flex flex-col justify-center h-full text-xl uppercase  text-white">
-            {name[0]}
-          </div>
+    <div className="shadow h-14 flex justify-between items-center px-4">
+      <div className="text-lg font-semibold">PayTM App</div>
+      <div className="flex items-center gap-4">
+        <div className="text-md">Hello, {name}</div>
+        <div className="rounded-full h-10 w-10 bg-black flex items-center justify-center text-white text-lg uppercase">
+          {name[0]}
         </div>
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+        >
+          Logout
+        </button>
       </div>
     </div>
   );
